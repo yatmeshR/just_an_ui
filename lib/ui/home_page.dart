@@ -90,14 +90,14 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Icon(Icons.add),
                         Text(
-                          "Add Payment type",
+                          "Add ",
                           style:
                               TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(width: 340,),
+                  SizedBox(width:100,),
                   Text(
                     'Total Amount: $totalAmount',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

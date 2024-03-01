@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -8,46 +9,51 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<RowItem> rows = [];
+  List<String> paymentOptions = ['Cash', 'Card', 'Online', 'Other'];
 
   @override
   void initState() {
     super.initState();
     // Initial row
-    rows.add(RowItem(type: '', amount: 0));
+    rows.add(RowItem(type: 'Cash', amount: 0));
   }
 
   Widget buildRow(RowItem rowItem) {
     return Row(
       children: [
         Expanded(
-          child: TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Payment Type',
-              hintText: "Select Type",
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black)),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.black),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButtonFormField(
+              value: rowItem.type,
+              items: paymentOptions.map((String option) {
+                return DropdownMenuItem(
+                  value: option,
+                  child: Text(option),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  rowItem.type = value.toString();
+                });
+              },
+              decoration: InputDecoration(
+                labelText: 'Payment Type',
+                border: OutlineInputBorder(),
               ),
             ),
-            onChanged: (value) {
-              rowItem.type = value;
-            },
           ),
         ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Amount',
-                hintText: "Enter the amount",
+              decoration: InputDecoration(labelText: 'Amount', hintText: "Enter the amount",
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black)),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
-                ),
-              ),
+                ),),
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 rowItem.amount = int.tryParse(value) ?? 0;
@@ -55,6 +61,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+
         IconButton(
           icon: Icon(Icons.delete),
           onPressed: () {
@@ -92,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           "Add ",
                           style:
-                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         )
                       ],
                     ),

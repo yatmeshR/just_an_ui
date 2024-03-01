@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.only(left: 25,right: 25,top: 40),
           child: Column(
             children: [
               for (var rowItem in rows) buildRow(rowItem),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  SizedBox(width:100,),
+                  SizedBox(width:60,),
                   Text(
                     'Total Amount: $totalAmount',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
